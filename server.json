@@ -1,0 +1,36 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Desenvolvimento de site",
+      "type": "income",
+      "category": "Venda",
+      "price": 14000,
+      "createdAt": "Mon Jan 22 2024"
+    },
+    {
+      "id": 2,
+      "description": "Desenvolvimento de portfolio",
+      "type": "income",
+      "category": "Freelance",
+      "price": 5000,
+      "createdAt": "Mon Jan 22 2024"
+    },
+    {
+      "description": "Teste",
+      "price": 100,
+      "category": "venda",
+      "type": "income",
+      "ceratedAt": "2024-02-18T16:42:48.609Z",
+      "id": 3
+    },
+    {
+      "description": "Portfolio do Inacio",
+      "price": 250,
+      "category": "Freelancer",
+      "type": "income",
+      "ceratedAt": "2024-02-18T17:21:03.288Z",
+      "id": 4
+    }
+  ]
+}

@@ -1,38 +1,50 @@
 import { Header } from '../../components/Header'
 import { Summary } from '../../components/Summary'
+import { SearchForm } from './components/SearchForm'
 import {
   PriceHighLight,
   TransactionsContainer,
   TransactionsTable,
 } from './styles'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
+import { priceFormatter, dateFormatter } from '../../utils/formatter'
+import { MagicMotion } from 'react-magic-motion'
+import { useContextSelector } from 'use-context-selector'
 
 export function Transactions() {
+  const transactions = useContextSelector(TransactionsContext, (context) => {
+    return context.transactions
+  })
+
   return (
     <div>
       <Header />
       <Summary />
 
       <TransactionsContainer>
-        <TransactionsTable>
-          <tbody>
-            <tr>
-              <td width="50%">Desenvolvimento de site</td>
-              <td>
-                <PriceHighLight variant="income">R$ 12.000,00</PriceHighLight>
-              </td>
-              <td> Venda </td>
-              <td>13/04/2023</td>
-            </tr>
-            <tr>
-              <td width="50%">Creatina</td>
-              <td>
-                <PriceHighLight variant="outcome"> - $ 89,00 </PriceHighLight>
-              </td>
-              <td> Consumos </td>
-              <td> 11/04/2023 </td>
-            </tr>
-          </tbody>
-        </TransactionsTable>
+        <SearchForm />
+        <MagicMotion isLoggingEnabled>
+          <TransactionsTable>
+            <tbody>
+              {transactions.map((transaction) => {
+                return (
+                  <tr key={transaction.id}>
+                    <td width="50%">{transaction.description}</td>
+                    <td>
+                      <PriceHighLight variant={transaction.type}>
+                        {transaction.type === 'outcome' && '- '}
+                        {'  '}
+                        {priceFormatter.format(transaction.price)}
+                      </PriceHighLight>
+                    </td>
+                    <td> {transaction.category} </td>
+                    <td> {dateFormatter.format(new Date())} </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </TransactionsTable>
+        </MagicMotion>
       </TransactionsContainer>
     </div>
   )
